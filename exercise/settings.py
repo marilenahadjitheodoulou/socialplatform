@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from .config import SOCIAL_AUTH_FACEBOOK_KEY, SOCIAL_AUTH_FACEBOOK_SECRET, SOCIAL_AUTH_GOOGLE_OAUTH2_KEY, SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -137,10 +138,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-SOCIAL_AUTH_FACEBOOK_KEY = '755968921896106'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'b9d6d68ecf2831e7a42fb4190701a072'  # App Secret
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '761757747177-m8vcapboi16f8gku57egoebo63dm5rtq.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'wp0vREUjgMhu3eTNjvUwK5lW'
