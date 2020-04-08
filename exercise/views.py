@@ -11,3 +11,6 @@ class LogInView(LoginRequiredMixin, TemplateView):
 
 class LogOutView(LoginRequiredMixin, BaseLogoutView):
     template_name = 'logout.html'
+
+def home(request):
+    return render(request, 'home.html')
