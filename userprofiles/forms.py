@@ -35,13 +35,13 @@ class UserRegisterForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('location', 'age')
+        fields = ('location', 'number')
 
     def save(self, commit=True):
         user = super().save(commit=False)
 
         user.location = self.cleaned_data['location']
-        user.age = self.cleaned_data['age']
+        user.number = self.cleaned_data['number']
 
         if commit:
             user.save()

@@ -1,9 +1,26 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserProfileForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import (
+    LogoutView as BaseLogoutView
+)
+class LogInView(LoginRequiredMixin, TemplateView):
+    template_name = 'login.html'
 
+class LogOutView(LoginRequiredMixin, BaseLogoutView):
+    template_name = 'logout.html'
+
+def home(request):
+    count = User.objects.count()
+    return render(request, 'home.html', {
+        'count': count
+    })
+    
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -29,8 +46,8 @@ def register(request):
         profile_form = UserProfileForm()
 
     context = {'form' : form, 'profile_form' : profile_form}
-    return render(request, 'userprofiles/register.html', context)
+    return render(request, 'registration/register.html', context)
 
 @login_required
 def profile(request):
-    return render(request, 'userprofiles/profile.html')
+    return render(request, 'registration/profile.html')

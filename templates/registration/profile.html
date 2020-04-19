@@ -1,4 +1,7 @@
+{% extends 'base.html' %}
+
 {% load crispy_forms_tags %}
 {% block content %}
 <h1>This is the {{ user.username }} 's profile</h1>
+<a href="{% url 'logout' %}">Log out</a>
 {% endblock content %}
