@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'social_django',
     'userprofiles',
     'crispy_forms',
-    'product'
+    'product',
 ]
 
 
@@ -144,6 +144,8 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+
 LOGIN_REDIRECT_URL = 'profile'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

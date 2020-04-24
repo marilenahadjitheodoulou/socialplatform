@@ -7,32 +7,34 @@ STATE_TYPE_CHOICES = (
     ('BROKEN', 'Broken'),
 )
 
-CATEGORIES_TYPE_CHOICE = (
-    ('FOOD', 'Food'),
-    ('TEGNOLOGY', 'Tegnology'),
-    ('HOUSEHOLDS_ITEMS', 'Households_Items'),
-    ('CLOTHING', 'Clothing'),
-    ('HYGIENE', 'Hygiene'),
-    ('GAMES', 'Games'),
-    ('MATERNITY', 'Maternity'),
-    ('MEDICINE', 'Medicine'),
-    ('STATIONERY', 'Stationery'),
-)
+class ProductCategory(models.Model):
+    category_type = models.CharField(
+        max_length=50, blank=False, default="")
 
-SUBCATEGORIES_TYPE_CHOICE = (
-    ('CEREALS', 'Cereals'),
-)
+    class Meta:
+        verbose_name = 'product category'
+        verbose_name_plural = 'product categories'
 
+    def __str__(self):
+        return self.category_type
 
+class ProductSubcategory(models.Model):
+    category = models.ForeignKey(ProductCategory, default="", on_delete=models.CASCADE)
+    subcategory_type = models.CharField(
+        max_length=50, blank=False, default="")
+    class Meta:
+        verbose_name = 'product subcategory'
+        verbose_name_plural = 'product subcategories'
+
+    def __str__(self):
+        return self.subcategory_type
 class Product(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(ProductCategory, default="", on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(ProductSubcategory, default="", on_delete=models.CASCADE)
 
     state_type = models.CharField(
-        max_length=50, blank=False, choices=STATE_TYPE_CHOICES)
-    categories_type = models.CharField(
-        max_length=50, blank=False, choices=CATEGORIES_TYPE_CHOICE)
-    subcategories_type = models.CharField(
-        max_length=50, blank=False, choices=SUBCATEGORIES_TYPE_CHOICE)
-
+        max_length=50, blank=False, default="", choices=STATE_TYPE_CHOICES)
+    
     def __str__(self):
         return self.user.username

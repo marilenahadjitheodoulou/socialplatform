@@ -7,14 +7,14 @@ from .models import Product
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('state_type', 'categories_type', 'subcategories_type')
+        fields = ('state_type', 'category', 'subcategory')
 
     def save(self, commit=True):
         user = super().save(commit=False)
 
         user.state_type = self.cleaned_data['state_type']
-        user.categories_type = self.cleaned_data['categories_type']
-        user.subcategories_type = self.cleaned_data['subcategories_type']
+        user.category = self.cleaned_data['category']
+        user.subcategory = self.cleaned_data['subcategory']
 
         if commit:
             user.save()
