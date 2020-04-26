@@ -14,6 +14,7 @@ urlpatterns = [
     path('oauth/', include('social_django.urls', namespace='social')),
     path('register/', userprofiles_views.register, name='register'),
     path('profile/', userprofiles_views.profile, name='profile'),
+    path('profile-update/', userprofiles_views.ProfileUpdateView.as_view(), name='profile-update'),
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
     path('upload/', product_views.upload, name='upload'),

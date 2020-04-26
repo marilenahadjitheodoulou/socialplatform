@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'userprofiles',
     'crispy_forms',
     'product',
+    
 ]
 
 
@@ -59,6 +60,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'exercise.urls'
+
 
 TEMPLATES = [
     {
@@ -85,6 +87,8 @@ AUTHENTICATION_BACKENDS = (
 
     'django.contrib.auth.backends.ModelBackend',
 )
+
+
 
 WSGI_APPLICATION = 'exercise.wsgi.application'
 

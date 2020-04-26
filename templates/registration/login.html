@@ -3,28 +3,68 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="content-section">
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Log In</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Login</button>
+<div class="card o-hidden border-0 shadow-lg my-5">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="text-center">
+                    <h2 class="page-header">Sign In</h2>
+                    <h4 style="margin-bottom: 30px; margin-top: 20px">You may register through your social media accounts or your email.</h4>
+                </div>
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block">
+                                <div class="p-5">
+                                    <h3 class="page-header">Email Account!</h3>
+
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        {{form | crispy}}
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fa fa-sign-in"></i>Log in</button>
+                                        <input type="hidden" name="next" value="{{ next }}"/>
+                                    </form>
+                                    <hr>
+                                    <div>
+                                        <p>Forgot your password?<a
+                                                href="{% url 'password_reset' %}">Reset it</a>.</p>
+                                        <p>Not a member?<a href="{% url 'register' %}">Register</a>.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-none d-lg-block">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h3 class="page-header">Social Media!</h3>
+                                        <br>
+                                        <form method="post" action="">
+                                            <!-- facebook login button -->
+                                            <p><a class="btn"
+                                                    style="width: 180px; margin-top: 10px; background-color: #3b5998; color: #ffffff"
+                                                    href="{% url 'social:begin' 'facebook' %}"> Login with Facebook
+                                                </a></p>
+                                            <!-- google+ login button -->
+                                            <p><a class="btn"
+                                                    style="width: 180px; margin-top: 10px; background-color: #dd4b39; color: #ffffff"
+                                                    href="{% url 'social:begin' 'google-oauth2' %}"> Login with Google
+                                                </a></p>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <a href="{% url 'password_reset' %}" class="btn btn-link">Forgot your password?</a>
-    </form>
-
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-        </small>
-    </div>
-
-    <p><strong>-- Social Media --</strong></p>
-    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
-    <br>
-    <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
-</div>
-{% endblock content %}
+        {% endblock content %}

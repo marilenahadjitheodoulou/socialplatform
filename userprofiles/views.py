@@ -55,12 +55,42 @@ def register(request):
     context = {'form': form, 'profile_form': profile_form}
     return render(request, 'registration/register.html', context)
 
+    
+class ProfileUpdateView(LoginRequiredMixin, TemplateView):
+    updateform = UserRegisterForm
+    updateprofile_form = UserProfileForm
+    template_name = 'registration/profile-update.html'
+
+    def post(self, request):
+
+        post_data = request.POST or None
+        file_data = request.FILES or None
+
+        updateform = UserRegisterForm(post_data, instance=request.user)
+        updateprofile_form = UserProfileForm(post_data, file_data, instance=request.user)
+
+        if updateform.is_valid() and updateprofile_form.is_valid():
+            updateform.save()
+            updateprofile_form.save()
+            messages.error(request, 'Your profile is updated successfully!')
+            return redirect('profile')
+
+        context = self.get_context_data(
+                                        updateform=updateform,
+                                        updateprofile_form=updateprofile_form
+                                    )
+
+        return self.render_to_response(context)     
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
 
 @login_required
 def profile(request):
-    print(request.user)
-    userprofile = UserProfile.objects.get(user_id=request.user.id)
-    print(userprofile.user_type)
+    #print(request.user)
+    #userprofile = UserProfile.objects.get(user_id=request.user.id)
+    #print(userprofile.user_type)
     return render(request, 'registration/profile.html')
 
         
