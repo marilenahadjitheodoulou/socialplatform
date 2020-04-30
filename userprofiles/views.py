@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
 from userprofiles.models import UserProfile
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserProfileForm
+from .forms import UserRegisterForm, UserProfileForm, EditProfileForm, ProfileForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import (
     LogoutView as BaseLogoutView
@@ -55,42 +57,32 @@ def register(request):
     context = {'form': form, 'profile_form': profile_form}
     return render(request, 'registration/register.html', context)
 
-    
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'registration/profile.html'
+
 class ProfileUpdateView(LoginRequiredMixin, TemplateView):
-    updateform = UserRegisterForm
-    updateprofile_form = UserProfileForm
-    template_name = 'registration/profile-update.html'
+    form = EditProfileForm
+    profile_form = UserProfileForm
+    template_name = 'registration/edit_profile.html'
 
     def post(self, request):
 
         post_data = request.POST or None
-        file_data = request.FILES or None
-
-        updateform = UserRegisterForm(post_data, instance=request.user)
-        updateprofile_form = UserProfileForm(post_data, file_data, instance=request.user)
-
-        if updateform.is_valid() and updateprofile_form.is_valid():
-            updateform.save()
-            updateprofile_form.save()
-            messages.error(request, 'Your profile is updated successfully!')
+        
+        form = EditProfileForm(post_data, instance=request.user)
+        profile_form = UserProfileForm(post_data, instance=request.user.userprofile) 
+    
+        if form.is_valid() and profile_form.is_valid():
+            form.save()
+            profile_form.save()
             return redirect('profile')
 
         context = self.get_context_data(
-                                        updateform=updateform,
-                                        updateprofile_form=updateprofile_form
-                                    )
+            form=form,
+            profile_form=profile_form
+        )
 
         return self.render_to_response(context)     
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
-
-
-@login_required
-def profile(request):
-    #print(request.user)
-    #userprofile = UserProfile.objects.get(user_id=request.user.id)
-    #print(userprofile.user_type)
-    return render(request, 'registration/profile.html')
-
-        

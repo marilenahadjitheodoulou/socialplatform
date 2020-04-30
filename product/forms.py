@@ -6,14 +6,13 @@ from userprofiles.forms import UserRegisterForm
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('state_type', 'category', 'subcategory')
+        fields = ('category', 'state_type')
 
     def save(self, commit=True):
         user = super().save(commit=False)
 
-        user.state_type = self.cleaned_data['state_type']
         user.category = self.cleaned_data['category']
-        user.subcategory = self.cleaned_data['subcategory']
+        user.state_type = self.cleaned_data['state_type']
 
         if commit:
             user.save()

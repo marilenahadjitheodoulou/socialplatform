@@ -1,13 +1,15 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.forms import ModelForm
+
 from .models import UserProfile
 
 
 class UserRegisterForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30)
-    last_name = forms.CharField(max_length=30)
-    email = forms.EmailField(required=True)
+    first_name = forms.CharField(max_length=30, required=True)
+    last_name = forms.CharField(max_length=30, required=True)
+    email = forms.EmailField(required=True, help_text='Enter a valid email address')
 
     class Meta:
         model = User
@@ -25,6 +27,14 @@ class UserRegisterForm(UserCreationForm):
             user.save()
         return user
 
+class EditProfileForm(ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name', 
+            'last_name', 
+            'email', 
+        ]
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -41,3 +51,8 @@ class UserProfileForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('location', 'number', 'user_type')

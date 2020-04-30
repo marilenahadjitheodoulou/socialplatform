@@ -11,8 +11,6 @@ def upload(request):
         if form.is_valid():
             form.save()
 
-        #  categories_type = form.cleaned_data.get('categories_type')
-        #  state_type = form.cleaned_data.get('state_type')
             messages.success(request, f'Your product has been created!')
 
             return redirect('profile')

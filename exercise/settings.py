@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_PROFILE_MODULE = "userprofiles.UserProfile"
 
 # Application definition
 
@@ -81,14 +82,24 @@ TEMPLATES = [
     },
 ]
 
+AUTH_PROFILE_MODULE = "userprofiles.UserProfile"
+
 AUTHENTICATION_BACKENDS = (
+    #For Facebook Authentication
     'social_core.backends.facebook.FacebookOAuth2',
+
+    # For Google Authentication
     'social_core.backends.google.GoogleOAuth2',
 
+    # Default Django Auth Backends
     'django.contrib.auth.backends.ModelBackend',
 )
 
-
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'groups_access_member_info']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email',
+    'edges': 'groups'
+}
 
 WSGI_APPLICATION = 'exercise.wsgi.application'
 

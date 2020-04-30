@@ -18,10 +18,10 @@
                 <h2>{{user.first_name}} {{user.last_name}}</h2>
                 <p><strong>Username: </strong> {{user.username}} </p>
                 <p><strong>Email: </strong> {{user.email}} </p>
-                <p><strong>Location: </strong> {{userprofile.location}} </p>
-                <p><strong>Phone Number: </strong> {{userprofile.number}} </p>
-                <p><strong>User_type: </strong> {{userprofile.user_type}} </p>
-                <a href="{% url 'profile-update' %}" class="btn btn-sm btn-primary shadow-sm">Update Profile</a>
+                <p><strong>Location: </strong> {{user.userprofile.location}} </p>
+                <p><strong>Phone Number: </strong> {{user.userprofile.number}} </p>
+                <p><strong>User_type: </strong> {{user.userprofile.user_type}} </p>
+                <a href="{% url 'edit_profile' %}" class="btn btn-sm btn-primary shadow-sm">Update Profile</a>
             </div>
           </div>
         </div>
