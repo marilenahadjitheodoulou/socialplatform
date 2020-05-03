@@ -51,8 +51,3 @@ class UserProfileForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
-class ProfileForm(ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('location', 'number', 'user_type')
