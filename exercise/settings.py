@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'userprofiles',
     'crispy_forms',
     'product',
-    
 ]
 
 
@@ -81,8 +80,6 @@ TEMPLATES = [
         },
     },
 ]
-
-AUTH_PROFILE_MODULE = "userprofiles.UserProfile"
 
 AUTHENTICATION_BACKENDS = (
     #For Facebook Authentication
@@ -156,6 +153,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# Media Files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

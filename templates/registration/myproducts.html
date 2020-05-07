@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800">My Products</h1>
+    </div>
+    <!-- Main Content Here -->
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>State_type</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for product in products %}
+                {{product.category}}
+                {{product.title}}
+                {{product.description}}
+                {{product.state_type}}
+                {{product.image}}
+                <br>
+                {% endfor %}
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>State_type</th>
+                <th>Image</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+
+
+
+</div>
+<!-- /.container-fluid -->
+{% endblock content %}
