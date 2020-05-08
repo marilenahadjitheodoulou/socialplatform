@@ -4,11 +4,12 @@ from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from .forms import ProductForm
 from .models import Product
+from django.core.files.storage import FileSystemStorage
 
 
 def upload(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST)#, request.FILES)
+        form = ProductForm(request.POST, request.FILES)
 
         if form.is_valid():
             upload = form.save(commit=False)

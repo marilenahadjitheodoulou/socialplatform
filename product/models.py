@@ -15,14 +15,26 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return self.name
+
+class Subcategory(models.Model):
+    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name = 'subcategory'
+        verbose_name_plural = 'subcategories'
+
+    def __str__(self):
+        return self.name
     
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
     state_type = models.CharField(max_length=10, choices=STATE_TYPE_CHOICES)
-    #image = models.ImageField(upload_to='media/', default="")
+    image = models.ImageField(upload_to='media', blank=False)
 
     def __str__(self):
         return self.title

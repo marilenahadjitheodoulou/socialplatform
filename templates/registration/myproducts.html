@@ -22,28 +22,20 @@
             </tr>
         </thead>
         <tbody>
+            {% for product in products %}
             <tr>
-                {% for product in products %}
                 {{product.category}}
                 {{product.title}}
                 {{product.description}}
                 {{product.state_type}}
-                {{product.image}}
+                {% if product.image %}
+                <img src="{{ product.image.url }}" width="240px">
+                {% endif %}
                 <br>
-                {% endfor %}
             </tr>
+            {% endfor %}
         </tbody>
-        <tfoot>
-            <tr>
-                <th>Category</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>State_type</th>
-                <th>Image</th>
-            </tr>
-        </tfoot>
     </table>
-
 </div>
 
 
