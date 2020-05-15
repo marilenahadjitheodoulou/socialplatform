@@ -10,8 +10,8 @@ class ProductCategory(models.Model):
     name = models.CharField(max_length=50)
     
     class Meta:
-        verbose_name = 'product category'
-        verbose_name_plural = 'products categories'
+        verbose_name = 'productcategory'
+        verbose_name_plural = 'productscategories'
 
     def __str__(self):
         return self.name
@@ -29,8 +29,8 @@ class Subcategory(models.Model):
     
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(ProductCategory, on_delete=models.SET_NULL, null=True)
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=50)
     description = models.TextField()
     state_type = models.CharField(max_length=10, choices=STATE_TYPE_CHOICES)

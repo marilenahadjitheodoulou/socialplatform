@@ -16,8 +16,10 @@
           <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-              {{ form.as_p }}
-              {{ profile_form.as_p }}
+              <table>
+                {{ form.as_table }}
+                {{ profile_form.as_table }}
+              </table>
             </fieldset>
             <div class="form-group">
               <button class="btn btn-outline-info" type="submit">Sign Up</button>

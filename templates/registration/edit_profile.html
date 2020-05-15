@@ -23,8 +23,10 @@
                   </div>
                   <form method="POST">
                       {% csrf_token %}
-                      {{form | crispy}}
-                      {{profile_form | crispy}}
+                      <table>
+                        {{form.as_table}}
+                        {{profile_form.as_table}}
+                      </table>
                     <button type="submit" class="btn btn-success btn-block">Update</button>
                   </form>
                   <hr>

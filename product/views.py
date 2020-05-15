@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from .forms import ProductForm
-from .models import Product
+from .models import Product, Subcategory, ProductCategory
 from django.core.files.storage import FileSystemStorage
 
 
@@ -32,3 +32,8 @@ class UploadView(TemplateView):
         products = Product.objects.filter(user=request.user)
 
         return render(request, self.template_name, {'products': products})
+
+def load_subcategories(request):    
+    category_id = request.GET.get('category')
+    subcategories = Subcategory.objects.filter(category_id=category_id).order_by('name')
+    return render(request, 'registration/load_subcategories.html', {'subcategories': subcategories})
