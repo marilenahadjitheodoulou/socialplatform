@@ -33,6 +33,14 @@ class UploadView(TemplateView):
 
         return render(request, self.template_name, {'products': products})
 
+class ProductView(TemplateView):
+    template_name = 'registration/products.html'
+
+    def get(self, request):
+        allproducts = Product.objects.filter()
+
+        return render(request, self.template_name, {'allproducts': allproducts})
+
 def load_subcategories(request):    
     category_id = request.GET.get('category')
     subcategories = Subcategory.objects.filter(category_id=category_id).order_by('name')

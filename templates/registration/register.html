@@ -17,12 +17,12 @@
             {% csrf_token %}
             <fieldset class="form-group">
               <table>
-                {{ form.as_table }}
-                {{ profile_form.as_table }}
+                {{ form.as_p }}
+                {{ profile_form.as_p }}
               </table>
             </fieldset>
             <div class="form-group">
-              <button class="btn btn-outline-info" type="submit">Sign Up</button>
+              <button class="btn btn-outline-info" type="submit"><i class="fa fa-user-plus" style="font-size:20px"></i> Sign Up</button>
             </div>
           </form>
           <hr>

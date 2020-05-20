@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+import os
+
+def get_upload_path(instance, filename):
+    return os.path.join(
+      "user_%d" % instance.user.id, "product_%s" % instance.user, filename)
 
 STATE_TYPE_CHOICES = (
     ('USED', 'Used'),
@@ -34,7 +39,8 @@ class Product(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     state_type = models.CharField(max_length=10, choices=STATE_TYPE_CHOICES)
-    image = models.ImageField(upload_to='media', blank=False)
+    image = models.ImageField(upload_to=get_upload_path, blank=False)
+    extra_image = models.ImageField(upload_to=get_upload_path, blank=True)
 
     def __str__(self):
         return self.title

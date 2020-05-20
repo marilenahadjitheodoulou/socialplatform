@@ -15,7 +15,7 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     
-    list_display = ('user', 'category', 'subcategory', 'title', 'description', 'state_type', 'image')
+    list_display = ('user', 'category', 'subcategory', 'title', 'description', 'state_type', 'image', 'extra_image')
     class Meta:
         model = Product
 

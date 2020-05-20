@@ -50,7 +50,7 @@ def register(request):
                 request, f'Your account has been created! You are now able to log in')
             login(request, user)
 
-            return redirect('login')
+            return redirect('profile')
     else:
         form = UserRegisterForm()
         profile_form = UserProfileForm()

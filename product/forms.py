@@ -5,7 +5,7 @@ from .models import Product, Subcategory
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('category', 'subcategory', 'title', 'description', 'state_type', 'image')
+        fields = ('category', 'subcategory', 'title', 'description', 'state_type', 'image', 'extra_image')
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -29,7 +29,7 @@ class ProductForm(forms.ModelForm):
         user.description = self.cleaned_data['description']        
         user.state_type = self.cleaned_data['state_type']
         user.image = self.cleaned_data['image']
-
+        user.extra_image = self.cleaned_data['extra_image']
 
         if commit:
             user.save()
