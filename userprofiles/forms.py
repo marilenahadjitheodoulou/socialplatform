@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ModelForm
 
-from .models import UserProfile
+from .models import UserProfile, Ngodetails
 
 
 class UserRegisterForm(UserCreationForm):
@@ -47,6 +47,28 @@ class UserProfileForm(forms.ModelForm):
         user.location = self.cleaned_data['location']
         user.number = self.cleaned_data['number']
         user.user_type = self.cleaned_data['user_type']
+
+        if commit:
+            user.save()
+        return user
+
+class EditProForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = [
+            'location', 
+            'number', 
+        ]
+
+class NgodetailsForm(forms.ModelForm):
+    class Meta: 
+        model = Ngodetails
+        fields = ('pdf',)
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+
+        user.pdf = self.cleaned_data['pdf']
 
         if commit:
             user.save()

@@ -4,6 +4,11 @@ from django.dispatch import receiver
 from django.urls import reverse 
 from django.db.models.signals import post_save
 from django.conf import settings
+import os
+
+def get_upload_path(instance, filename):
+    return os.path.join(
+      "user_%d" % instance.user.id, "detail_%s" % instance.user, filename)
 
 class UserProfileManager(models.Manager):
     pass
@@ -31,3 +36,13 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         return reverse('profile')#, kwargs={'slug':self.slug})
+
+class Ngodetails(models.Model):
+    user = models.OneToOneField(
+                User, 
+                on_delete=models.CASCADE, 
+        )
+    pdf = models.FileField(upload_to=get_upload_path, blank=False)
+
+    def __str__(self):
+        return self.user.username

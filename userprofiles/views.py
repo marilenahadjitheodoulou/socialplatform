@@ -3,12 +3,12 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from userprofiles.models import UserProfile
+from userprofiles.models import UserProfile, Ngodetails
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserProfileForm, EditProfileForm
+from .forms import UserRegisterForm, UserProfileForm, EditProfileForm, NgodetailsForm, EditProForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import (
     LogoutView as BaseLogoutView
@@ -72,7 +72,7 @@ class ProfileCreateView(CreateView):
 
 class ProfileUpdateView(LoginRequiredMixin, TemplateView):
     form = EditProfileForm
-    profile_form = UserProfileForm
+    profile_form = EditProForm
     template_name = 'registration/edit_profile.html'
 
     def post(self, request):
@@ -82,7 +82,7 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
         #if not getattr(request.user,'userprofile'):
         #    return redirect('create_profile')  
 
-        profile_form = UserProfileForm(request.POST or None, instance=request.user.userprofile) 
+        profile_form = EditProForm(request.POST or None, instance=request.user.userprofile) 
             
         if form.is_valid() and profile_form.is_valid():
             form.save()
@@ -98,3 +98,19 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+def ngodetails(request):
+    if request.method == 'POST':
+        form = NgodetailsForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            details = form.save(commit=False)
+            details.user = request.user
+            details.save()
+
+            return redirect('profile')
+    else:
+        form = NgodetailsForm()
+    
+    context = {'form': form}
+    return render(request, 'registration/ngodetails.html', context)

@@ -16,6 +16,7 @@ urlpatterns = [
     path('profile/', userprofiles_views.ProfileView.as_view(), name='profile'),
     path('edit_profile/', userprofiles_views.ProfileUpdateView.as_view(), name='edit_profile'),
     path('create_profile/', userprofiles_views.ProfileCreateView.as_view(), name='create_profile'),
+    path('ngodetails/', userprofiles_views.ngodetails, name='ngodetails'),
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
     path('upload/', product_views.upload, name='upload'),
