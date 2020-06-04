@@ -7,42 +7,90 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-        <h1 class="h3 mb-0 text-gray-800">My Products</h1>
-    </div>
     <!-- Main Content Here -->
-    <table id="example" class="table table-bordered" style="width:100%">
-        <thead class="thead-light">
-            <tr>
-                <th>User</th>
-                <th>Category</th>
-                <th>Subcategory</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>State_type</th>
-                <th>Image</th>
-                <th>Extra_Image</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in allproducts %}
-            <tr>
-                <td>{{product.user}}</td>
-                <td>{{product.category}}</td>
-                <td>{{product.subcategory}}</td>
-                <td>{{product.title}}</td>
-                <td>{{product.description}}</td>
-                <td>{{product.state_type}}</td>
-                {% if product.image %}
-                <td><img id="myImg" src="{{ product.image.url }}" style="width:100%;max-width:100px"></td>
-                {% endif %}
-                {% if product.extra_image %}
-                <td><img id="myImg" src="{{ product.extra_image.url }}" style="width:100%;max-width:100px"></td>
-                {% endif %}
-                <br>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="card card-body">
+        <h5>All Products</h5>
+        <hr>
+        <h1 style="text-align: center;padding: 10px">{{total_product}}</h1>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+
+                <form method="get">
+                    {{myFilter.form}}
+
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+
+            </div>
+            <table id="example" class="table table-bordered" style="width:100%">
+                <thead class="thead-light">
+                    <tr>
+                        <th>User</th>
+                        <th>Category</th>
+                        <th>Subcategory</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>State_type</th>
+                        <th>Image</th>
+                        <th>Extra Image</th>
+                    </tr>
+                </thead>
+                {% for product in myFilter.qs %}
+                <tr>
+                    <td><a href="{% url 'userprofiles:user_profile' product.user.id %}">{{ product.user }}</a></td>
+                    <td>{{product.category}}</td>
+                    <td>{{product.subcategory}}</td>
+                    <td>{{product.title}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.state_type}}</td>
+                    {% if product.image %}
+                    <td><img id="myImg" src="{{ product.image.url }}" style="width:100%;max-width:100px"></td>
+                    {% endif %}
+                    {% if product.extra_image %}
+                    <td><img id="myImg" src="{{ product.extra_image.url }}" style="width:100%;max-width:100px"></td>
+                    {% endif %}
+                    <br>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
 </div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("myImg");
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+</script>
+
+</div>
+<!-- /.container-fluid -->
 {% endblock content %}

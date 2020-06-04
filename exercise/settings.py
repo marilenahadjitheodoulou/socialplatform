@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'userprofiles',
     'crispy_forms',
     'product',
+    'django_filters',
+    'bootstrapform',
 ]
 
 
@@ -161,8 +163,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-LOGIN_REDIRECT_URL = 'profile'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'profile'
+LOGIN_REDIRECT_URL = 'userprofiles:profile'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'userprofiles:profile'
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL = 'create_profile'
 
 

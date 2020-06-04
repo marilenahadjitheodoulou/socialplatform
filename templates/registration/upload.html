@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="content-section">
-  <form method="POST" id="productForm" data-subcategories-url="{% url 'load_subcategories' %}"
+  <form method="POST" id="productForm" data-subcategories-url="{% url 'product:load_subcategories' %}"
     enctype="multipart/form-data">
     {% csrf_token %}
     <fieldset class="form-group">

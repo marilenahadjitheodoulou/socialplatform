@@ -3,7 +3,8 @@
 {% block content %}
 <h2>Homepage</h2>
 <p>Welcome to My Site, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
-<p>
-  <strong>Total users registered: </strong> <i class="fa fa-users" style="font-size:20px"></i> {{ count }}
-</p>
+<strong>Total users registered: </strong> <i class="fa fa-users" style="font-size:20px"></i> {{ count }}
+<br>
+<strong>Total products : </strong> <i class="fa fa-shopping-basket" style="font-size:20px"></i> {{ total_product }}
+
 {% endblock %}

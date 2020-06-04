@@ -4,12 +4,13 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from userprofiles.models import UserProfile, Ngodetails
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserProfileForm, EditProfileForm, NgodetailsForm, EditProForm
 from django.contrib.auth import authenticate, login
+from product.models import Product
 from django.contrib.auth.views import (
     LogoutView as BaseLogoutView
 )
@@ -25,9 +26,11 @@ class LogOutView(LoginRequiredMixin, BaseLogoutView):
 
 def home(request):
     count = User.objects.count()
-    return render(request, 'home.html', {
-        'count': count
-    })
+    allproducts = Product.objects.filter()
+
+    total_product = allproducts.count()
+    context = {'count': count, 'total_product': total_product}
+    return render(request, 'home.html', context)
 
 
 def register(request):
@@ -114,3 +117,7 @@ def ngodetails(request):
     
     context = {'form': form}
     return render(request, 'registration/ngodetails.html', context)
+
+def user_profile(request, pk):
+    users = User.objects.get(id=pk)
+    return render(request, 'registration/user_profile.html', {'users': users})

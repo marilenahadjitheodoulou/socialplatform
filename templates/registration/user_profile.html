@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5">
+        <div class="card-body">
+            <h2>{{users.first_name}} {{users.last_name}}</h2>
+            <p><strong>Username: </strong> {{users.username}} </p>
+            <p><strong>Email: </strong> {{users.email}} </p>
+            <p><strong>Location: </strong> {{users.userprofile.location}} </p>
+            <p><strong>Phone Number: </strong> {{users.userprofile.number}} </p>
+            <p><strong>User_type: </strong> {{users.userprofile.user_type}} </p>
+            <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'product:products' %}"
+                class="btn btn-sm btn-primary shadow-sm"><i class="fa fa-reply"
+                    style="font-size:20px"></i>Back</a>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
