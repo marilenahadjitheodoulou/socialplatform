@@ -28,6 +28,7 @@
             <table id="example" class="table table-bordered" style="width:100%">
                 <thead class="thead-light">
                     <tr>
+                        <th>Interest</th>
                         <th>User</th>
                         <th>Category</th>
                         <th>Subcategory</th>
@@ -40,6 +41,9 @@
                 </thead>
                 {% for product in myFilter.qs %}
                 <tr>
+                    {% if user.userprofile.user_type == 'NGO'%}
+                        <td><a href="{% url 'product:interest' %}"><i class="fa fa-heart-o" style="font-size:20px"></i></a></td>
+                    {% endif %}
                     <td><a href="{% url 'userprofiles:user_profile' product.user.id %}">{{ product.user }}</a></td>
                     <td>{{product.category}}</td>
                     <td>{{product.subcategory}}</td>

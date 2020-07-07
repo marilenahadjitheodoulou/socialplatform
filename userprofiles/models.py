@@ -35,7 +35,7 @@ class UserProfile(models.Model):
         return self.user.username
 
     def get_absolute_url(self):
-        return reverse('profile')#, kwargs={'slug':self.slug})
+        return reverse('userprofiles:profile')#, kwargs={'slug':self.slug})
 
 class Ngodetails(models.Model):
     user = models.OneToOneField(

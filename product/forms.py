@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Product, Subcategory
+from .models import Product, Subcategory, ProductInterest
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -30,6 +30,22 @@ class ProductForm(forms.ModelForm):
         user.state_type = self.cleaned_data['state_type']
         user.image = self.cleaned_data['image']
         user.extra_image = self.cleaned_data['extra_image']
+
+        if commit:
+            user.save()
+        return user
+
+class InterestForm(forms.ModelForm):
+    class Meta:
+        model = ProductInterest
+        fields = ('product', 'title', 'status')
+    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+
+        user.product = self.cleaned_data['product']
+        user.title = self.cleaned_data['title']
+        user.status = self.cleaned_data['status']
 
         if commit:
             user.save()

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 import os
+from django.utils import timezone
+from django.db.models.fields import DateTimeField
 
 def get_upload_path(instance, filename):
     return os.path.join(
@@ -45,4 +47,18 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+STATUS = (
+    ('Available', 'Available'),
+	('Pending', 'Pending'),
+	('Delivered', 'Delivered'),
+)
 
+class ProductInterest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50)
+    status = models.CharField(max_length=200, default='Available', choices=STATUS)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

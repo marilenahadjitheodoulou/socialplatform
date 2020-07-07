@@ -53,7 +53,7 @@ def register(request):
                 request, f'Your account has been created! You are now able to log in')
             login(request, user)
 
-            return redirect('profile')
+            return redirect('userprofiles:profile')
     else:
         form = UserRegisterForm()
         profile_form = UserProfileForm()
@@ -90,7 +90,7 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
         if form.is_valid() and profile_form.is_valid():
             form.save()
             profile_form.save()
-            return redirect('profile')
+            return redirect('userprofiles:profile')
 
         context = self.get_context_data(
             form=form,
@@ -111,7 +111,7 @@ def ngodetails(request):
             details.user = request.user
             details.save()
 
-            return redirect('profile')
+            return redirect('userprofiles:profile')
     else:
         form = NgodetailsForm()
     

@@ -33,6 +33,8 @@ AUTH_PROFILE_MODULE = "userprofiles.UserProfile"
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'chat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     'product',
     'django_filters',
     'bootstrapform',
+    'notifications',
 ]
 
 
@@ -101,7 +104,15 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 }
 
 WSGI_APPLICATION = 'exercise.wsgi.application'
-
+ASGI_APPLICATION = 'exercise.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -165,7 +176,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'userprofiles:profile'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'userprofiles:profile'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = 'create_profile'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = 'userprofiles:create_profile'
 
 
 

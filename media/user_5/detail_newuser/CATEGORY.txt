@@ -1,0 +1,242 @@
+[
+    {
+        "id": "1",
+        "name": "FOOD",
+        "parent_id": "0"
+    },
+    {
+        "id": "2",
+        "name": "TEGNOLOGY",
+        "parent_id": "0"
+    },
+    {
+        "id": "3",
+        "name": "HOUSEHOLDS_ITEMS",
+        "parent_id": "0"
+    },
+    {
+        "id": "4",
+        "name": "CLOTHING",
+        "parent_id": "0"
+    },
+    {
+        "id": "5",
+        "name": "HYGIENE",
+        "parent_id": "0"
+    },
+    {
+        "id": "6",
+        "name": "GAMES",
+        "parent_id": "0"
+    },
+    {
+        "id": "7",
+        "name": "MATERNITY",
+        "parent_id": "0"
+    },
+    {
+        "id": "8",
+        "name": "MEDICINE",
+        "parent_id": "0"
+    },
+    {
+        "id": "9",
+        "name": "STATIONERY",
+        "parent_id": "0"
+    },
+    {
+        "id": "10",
+        "name": "CEREALS",
+        "parent_id": "1"
+    },
+    {
+        "id": "11",
+        "name": "Sauces",
+        "parent_id": "1"
+    },
+    {
+        "id": "12",
+        "name": "Different kinds",
+        "parent_id": "1"
+    },
+    {
+        "id": "13",
+        "name": "Drinks",
+        "parent_id": "1"
+    },
+    {
+        "id": "14",
+        "name": "Pasta / Legumes",
+        "parent_id": "1"
+    },
+    {
+        "id": "15",
+        "name": "Canned food",
+        "parent_id": "1"
+    },
+    {
+        "id": "16",
+        "name": "Baked Goods",
+        "parent_id": "1"
+    },
+    {
+        "id": "17",
+        "name": "PC-Regional PC",
+        "parent_id": "2"
+    },
+    {
+        "id": "18",
+        "name": "PHONE / TABLETS",
+        "parent_id": "2"
+    },
+    {
+        "id": "19",
+        "name": "TVs",
+        "parent_id": "2"
+    },
+    {
+        "id": "20",
+        "name": "HOME APPLIANCES",
+        "parent_id": "2"
+    },
+    {
+        "id": "21",
+        "name": "AIR CONDITIONING / HEATING",
+        "parent_id": "2"
+    },
+    {
+        "id": "22",
+        "name": "Garden",
+        "parent_id": "3"
+    },
+    {
+        "id": "23",
+        "name": "Consumables",
+        "parent_id": "3"
+    },
+    {
+        "id": "24",
+        "name": "Furniture",
+        "parent_id": "3"
+    },
+    {
+        "id": "25",
+        "name": "Tools",
+        "parent_id": "3"
+    },
+    {
+        "id": "26",
+        "name": "Cleaning supplies",
+        "parent_id": "3"
+    },
+    {
+        "id": "27",
+        "name": "Linen",
+        "parent_id": "3"
+    },
+    {
+        "id": "28",
+        "name": "Children",
+        "parent_id": "4"
+    },
+    {
+        "id": "29",
+        "name": "Adolescents",
+        "parent_id": "4"
+    },
+    {
+        "id": "30",
+        "name": "Adults",
+        "parent_id": "4"
+    },
+    {
+        "id": "31",
+        "name": "Footwear",
+        "parent_id": "4"
+    },
+    {
+        "id": "32",
+        "name": "Men's care",
+        "parent_id": "5"
+    },
+    {
+        "id": "33",
+        "name": "Women's care",
+        "parent_id": "5"
+    },
+    {
+        "id": "34",
+        "name": "Parapharmaceuticals",
+        "parent_id": "5"
+    },
+    {
+        "id": "35",
+        "name": "Body care",
+        "parent_id": "5"
+    },
+    {
+        "id": "36",
+        "name": "Oral hygiene",
+        "parent_id": "5"
+    },
+    {
+        "id": "37",
+        "name": "Children",
+        "parent_id": "6"
+    },
+    {
+        "id": "38",
+        "name": "Adolescents",
+        "parent_id": "6"
+    },
+    {
+        "id": "39",
+        "name": "Of the sea",
+        "parent_id": "6"
+    },
+    {
+        "id": "40",
+        "name": "Maternal species",
+        "parent_id": "7"
+    },
+    {
+        "id": "41",
+        "name": "Baby products",
+        "parent_id": "7"
+    },
+    {
+        "id": "42",
+        "name": "Furniture",
+        "parent_id": "7"
+    },
+    {
+        "id": "43",
+        "name": "Medical equipment",
+        "parent_id": "8"
+    },
+    {
+        "id": "44",
+        "name": "Medicines",
+        "parent_id": "8"
+    },
+    {
+        "id": "45",
+        "name": "Notebooks-Books",
+        "parent_id": "9"
+    },
+    {
+        "id": "46",
+        "name": "Bags / Pencil Case",
+        "parent_id": "9"
+    },
+    {
+        "id": "47",
+        "name": "Stationery",
+        "parent_id": "9"
+    },
+    {
+        "id": "48",
+        "name": "Consumable office supplies",
+        "parent_id": "9"
+    }
+]

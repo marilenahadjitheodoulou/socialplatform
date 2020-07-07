@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
-from .forms import ProductForm
+from .forms import ProductForm, InterestForm
 from .models import *
 from django.core.files.storage import FileSystemStorage
 from .filters import OrderFilter
+from userprofiles.models import User
 
 def upload(request):
     if request.method == 'POST':
@@ -18,7 +19,7 @@ def upload(request):
 
             messages.success(request, f'Your product has been created!')
 
-            return redirect('myproducts')
+            return redirect('product:myproducts')
     else:
         form = ProductForm()
 
@@ -52,3 +53,33 @@ def load_subcategories(request):
     category_id = request.GET.get('category')
     subcategories = Subcategory.objects.filter(category_id=category_id).order_by('name')
     return render(request, 'registration/load_subcategories.html', {'subcategories': subcategories})
+
+def createInterest(request):
+    if request.method == 'POST':
+        form = InterestForm(request.POST)
+
+        if form.is_valid():
+            createInterest = form.save(commit=False)
+            createInterest.user = request.user
+            createInterest.save()
+            
+            return redirect('product:wishlist')
+    else:
+        form = InterestForm()
+
+    context = {'form': form}
+    return render(request, 'registration/interest.html', context)
+
+def wishlist(request):
+    interests = ProductInterest.objects.all()
+    context = {'interests':interests}
+    return render(request, 'registration/wishlist.html', context)
+
+def deleteInterest(request, pk):
+    interest = ProductInterest.objects.get(id=pk)
+    if request.method == "POST":
+        interest.delete()
+        return redirect('product:products')
+
+    context = {'item': interest}
+    return render(request, 'registration/delete.html', context)
