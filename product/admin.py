@@ -15,12 +15,12 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     
-    list_display = ('user', 'category', 'subcategory', 'title', 'description', 'state_type', 'image', 'extra_image')
+    list_display = ('user', 'category', 'subcategory', 'name', 'status', 'description', 'received_from_my_place', 'state_type', 'image', 'extra_image')
     class Meta:
         model = Product
 
 class ProductInterestAdmin(admin.ModelAdmin):
-    list_display = ('user', 'product', 'title', 'status', 'date_created')
+    list_display = ('user', 'wished_item', 'date_created')
 
     class Meta:
         model = ProductInterest

@@ -12,7 +12,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 class NgodetailsAdmin(admin.ModelAdmin):
     
-    list_display = ('user', 'pdf')
+    list_display = ('user', 'title', 'website', 'pdf')
     class Meta:
         model= Ngodetails
 

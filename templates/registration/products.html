@@ -6,10 +6,14 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
+    {% for message in messages %}
+        <div class="alert alert-success">
+        <a class="close" href="#" data-dismiss="alert">×</a>{{ message }}</div>
+    {% endfor %}
     <!-- Page Heading -->
     <!-- Main Content Here -->
     <div class="card card-body">
-        <h5>All Products</h5>
+        <h5>All Available Products</h5>
         <hr>
         <h1 style="text-align: center;padding: 10px">{{total_product}}</h1>
     </div>
@@ -28,12 +32,15 @@
             <table id="example" class="table table-bordered" style="width:100%">
                 <thead class="thead-light">
                     <tr>
+                        {% if user.userprofile.user_type == 'NGO'%}
                         <th>Interest</th>
+                        {% endif %}
                         <th>User</th>
                         <th>Category</th>
                         <th>Subcategory</th>
-                        <th>Title</th>
+                        <th>Name</th>
                         <th>Description</th>
+                        <th>Received_From_My_Place</th>
                         <th>State_type</th>
                         <th>Image</th>
                         <th>Extra Image</th>
@@ -42,13 +49,15 @@
                 {% for product in myFilter.qs %}
                 <tr>
                     {% if user.userprofile.user_type == 'NGO'%}
-                        <td><a href="{% url 'product:interest' %}"><i class="fa fa-heart-o" style="font-size:20px"></i></a></td>
+                    <td><a href="{% url 'product:interest' product.id %}"><i class="fa fa-heart-o" style="font-size:20px"></i></a>
+                    </td>
                     {% endif %}
                     <td><a href="{% url 'userprofiles:user_profile' product.user.id %}">{{ product.user }}</a></td>
                     <td>{{product.category}}</td>
                     <td>{{product.subcategory}}</td>
-                    <td>{{product.title}}</td>
+                    <td>{{product.name}}</td>
                     <td>{{product.description}}</td>
+                    <td>{{product.received_from_my_place}}</td>
                     <td>{{product.state_type}}</td>
                     {% if product.image %}
                     <td><img id="myImg" src="{{ product.image.url }}" style="width:100%;max-width:100px"></td>

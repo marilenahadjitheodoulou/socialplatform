@@ -3,17 +3,14 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
 <div class="container-fluid">
     <table id="example" class="table table-bordered" style="width:100%">
         <thead class="thead-light">
             <tr>
                 <th>User Interests</th>
                 <th>Product User</th>
-                <th>Product</th>
-                <th>Title</th>
+                <th>Wished_item</th>
                 <th>Date_Created</th>
-                <th>Status</th>
                 <th>Remove</th>
             </tr>
         </thead>
@@ -21,12 +18,14 @@
         <tr>
             <tbody>
                 <td><a href="{% url 'userprofiles:user_profile' user.id %}">{{user}}</a></td>
-                <td><a href="{% url 'userprofiles:user_profile' interest.product.user.id %}">{{ interest.product.user }}</a></td>
-                <td>{{interest.product}}</td>
-                <td>{{interest.title}}</td>
+                <td><a href="{% url 'userprofiles:user_profile' interest.wished_item.user.id %}">{{ interest.wished_item.user }}</a></td>
+                <td>{{interest.wished_item}}</td>
                 <td>{{interest.date_created}}</td>
-                <td>{{interest.status}}</td>
-                <td><a class="btn-sm btn-danger" href="{% url 'product:delete_interest' interest.id %}">Delete</a></td>           
+                {% if interest.wished_item.status == 'Pending' %}
+                <td><a class="btn-sm btn-danger" href="{% url 'product:delete_interest' interest.id %}">Delete</a></td>   
+                {% else %}
+                <td>You already received this item!</td>      
+                {% endif %}  
             </tbody>
         </tr>
         {% endfor %}

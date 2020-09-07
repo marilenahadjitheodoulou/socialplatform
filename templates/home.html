@@ -2,9 +2,16 @@
 
 {% block content %}
 <h2>Homepage</h2>
-<p>Welcome to My Site, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
-<strong>Total users registered: </strong> <i class="fa fa-users" style="font-size:20px"></i> {{ count }}
+<p>Welcome to Προσφέρω, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
 <br>
-<strong>Total products : </strong> <i class="fa fa-shopping-basket" style="font-size:20px"></i> {{ total_product }}
-
+<strong>Total civilians registered: </strong> <i class="fa fa-users" style="font-size:20px"></i> {{ countcivil }}
+<br>
+<strong>Total available products : </strong> <i class="fa fa-shopping-basket" style="font-size:20px"></i> {{ total_product }}
+<br>
+<strong>Total delivered  products : </strong> <i class="fa fa-handshake-o" style="font-size:20px"></i> {{ total_all }}
+<br>
+<strong> Total Non-governmental organizations registered: </strong> <i class="fa fa-users" style="font-size:20px"></i>{{ countngos }}
+<br>
+<a href="{% url 'userprofiles:allngo' %}">Check all the Non-governmental organization</a>.</p>
+ </strong> 
 {% endblock %}

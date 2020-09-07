@@ -4,14 +4,16 @@
 <div class="row">
 	<div class="col-md-6">
 		<div class="card card-body">
-
-			<form action="" method="POST">
-				{% csrf_token %}
-				{{form.as_p}}
-				
-				<input type="submit" name="Submit">
-			</form>
-
+			<form action="mailto:{{interests.user.email}}?subject = Feedback&body = Message" method="post" enctype="text/plain">
+				Username:<label for="lname"></label><br>
+				<input type="text" name="username" value="{{user}}"><br>
+				Reason:<label for="lname"></label><br>
+				<input type="text" name="reason" size="35" value="I am interested for product {{interests}}"><br>
+				Comment:<br>
+				<input type="text" name="comment" size="50"><br>
+				<input type="submit" value="Send">
+				<input type="reset" value="Reset">
+				</form>
 		</div>
 	</div>
 </div>

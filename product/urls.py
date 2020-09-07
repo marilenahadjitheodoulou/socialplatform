@@ -8,7 +8,8 @@ urlpatterns = [
     path('myproducts/', product_views.UploadView.as_view(), name='myproducts'),
     path('products/', product_views.ProductView.as_view(), name='products'),
     path('load_subcategories/', product_views.load_subcategories, name='load_subcategories'),
-    path('interest/', product_views.createInterest, name='interest'),
+    path('interest/<str:pk>/', product_views.createInterest, name='interest'),
     path('wishlist/', product_views.wishlist, name='wishlist'),
     path('delete_interest/<str:pk>/', product_views.deleteInterest, name='delete_interest'),
+    path('productdone/<str:pk>/', product_views.productdone, name='productdone'),
 ]

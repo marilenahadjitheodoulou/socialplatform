@@ -5,7 +5,7 @@
     <div class="col-md-6">
         <div class="card card-body">
 
-            <p>Are you sure you want to delete interest "{{item}}"</p>
+            <p>Are you sure you want to delete interest "{{item.wished_item}}"</p>
 
             <form action="{% url 'product:delete_interest' item.id  %}" method="POST">
 

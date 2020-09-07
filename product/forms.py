@@ -1,11 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Product, Subcategory, ProductInterest
+from .models import Product, Subcategory
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('category', 'subcategory', 'title', 'description', 'state_type', 'image', 'extra_image')
+        fields = ('category', 'subcategory', 'name', 'description', 'received_from_my_place','state_type', 'image', 'extra_image')
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,27 +25,12 @@ class ProductForm(forms.ModelForm):
 
         user.category = self.cleaned_data['category']
         user.subcategory = self.cleaned_data['subcategory']
-        user.title = self.cleaned_data['title']
-        user.description = self.cleaned_data['description']        
+        user.name = self.cleaned_data['name']
+        user.description = self.cleaned_data['description']  
+        user.received_from_my_place = self.cleaned_data['received_from_my_place']      
         user.state_type = self.cleaned_data['state_type']
         user.image = self.cleaned_data['image']
         user.extra_image = self.cleaned_data['extra_image']
-
-        if commit:
-            user.save()
-        return user
-
-class InterestForm(forms.ModelForm):
-    class Meta:
-        model = ProductInterest
-        fields = ('product', 'title', 'status')
-    
-    def save(self, commit=True):
-        user = super().save(commit=False)
-
-        user.product = self.cleaned_data['product']
-        user.title = self.cleaned_data['title']
-        user.status = self.cleaned_data['status']
 
         if commit:
             user.save()

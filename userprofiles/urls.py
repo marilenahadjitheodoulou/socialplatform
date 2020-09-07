@@ -11,4 +11,5 @@ urlpatterns = [
     path('edit_profile/', userprofiles_views.ProfileUpdateView.as_view(), name='edit_profile'),
     path('create_profile/', userprofiles_views.ProfileCreateView.as_view(), name='create_profile'),
     path('ngodetails/', userprofiles_views.ngodetails, name='ngodetails'),
+    path('allngo/', userprofiles_views.allngo, name='allngo'),
 ]

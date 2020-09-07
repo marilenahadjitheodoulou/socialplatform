@@ -7,7 +7,12 @@
         <div class="card-body">
             <h2>{{users.first_name}} {{users.last_name}}</h2>
             <p><strong>Username: </strong> {{users.username}} </p>
-            <p><strong>Email: </strong> {{users.email}} </p>
+            {% if users.userprofile.user_type == 'NGO'%}
+            <p><strong>Title: </strong> {{users.ngodetails.title}} </p>
+            {% endif %}
+            <p><strong>Email: </strong> <a href = "mailto:{{users.email}}?subject = Feedback&body = Message">
+                {{users.email}}
+                </a> </p>
             <p><strong>Location: </strong> {{users.userprofile.location}} </p>
             <p><strong>Phone Number: </strong> {{users.userprofile.number}} </p>
             <p><strong>User_type: </strong> {{users.userprofile.user_type}} </p>

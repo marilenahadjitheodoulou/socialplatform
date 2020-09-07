@@ -26,7 +26,8 @@ class UserProfile(models.Model):
                 unique=True,
                 related_name='userprofile'
         )
-    location = models.CharField(max_length=30, default=None)
+    location = models.CharField(default=None,
+        max_length=50, blank=False)
     number = models.IntegerField(default=None)
     user_type = models.CharField(default=None,
         max_length=50, blank=False, choices=USER_TYPE_CHOICES)
@@ -43,6 +44,9 @@ class Ngodetails(models.Model):
                 on_delete=models.CASCADE, 
         )
     pdf = models.FileField(upload_to=get_upload_path, blank=False)
+    title = models.CharField(default=None,
+        max_length=50, blank=False)
+    website = models.URLField(default=None)
 
     def __str__(self):
         return self.user.username

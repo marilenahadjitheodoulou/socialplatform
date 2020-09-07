@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+
+            <p>The "{{pro.name}}" product has been delivered? </p>
+
+            <form action="{% url 'product:productdone' pro.id  %}" method="POST">
+
+                {% csrf_token %}
+                <a class="btn btn-warning" href="{% url 'product:myproducts' %}">Cancel</a>
+
+                <input class="btn btn-danger" type="submit" name="Confirm" value="Yes">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

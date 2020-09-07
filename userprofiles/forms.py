@@ -63,12 +63,15 @@ class EditProForm(ModelForm):
 class NgodetailsForm(forms.ModelForm):
     class Meta: 
         model = Ngodetails
-        fields = ('pdf',)
+        fields = ('title', 'website', 'pdf')
 
     def save(self, commit=True):
         user = super().save(commit=False)
 
+        user.title = self.cleaned_data['title']
+        user.website = self.cleaned_data['website']
         user.pdf = self.cleaned_data['pdf']
+
 
         if commit:
             user.save()

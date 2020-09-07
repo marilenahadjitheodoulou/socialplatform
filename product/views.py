@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
-from .forms import ProductForm, InterestForm
+from .forms import ProductForm
 from .models import *
 from django.core.files.storage import FileSystemStorage
 from .filters import OrderFilter
@@ -39,9 +39,9 @@ class ProductView(TemplateView):
     template_name = 'registration/products.html'
 
     def get(self, request):
-        allproducts = Product.objects.filter()
+        allproducts = Product.objects.filter(status='Available')
         
-        tot = Product.objects.all()
+        tot = Product.objects.filter(status='Available')
         total_product = allproducts.count()
 
         myFilter = OrderFilter(request.GET, queryset=tot)
@@ -54,21 +54,14 @@ def load_subcategories(request):
     subcategories = Subcategory.objects.filter(category_id=category_id).order_by('name')
     return render(request, 'registration/load_subcategories.html', {'subcategories': subcategories})
 
-def createInterest(request):
-    if request.method == 'POST':
-        form = InterestForm(request.POST)
-
-        if form.is_valid():
-            createInterest = form.save(commit=False)
-            createInterest.user = request.user
-            createInterest.save()
-            
-            return redirect('product:wishlist')
-    else:
-        form = InterestForm()
-
-    context = {'form': form}
-    return render(request, 'registration/interest.html', context)
+def createInterest(request, pk):
+    interests = Product.objects.get(id=pk)
+    productinterest, created = ProductInterest.objects.get_or_create(
+        user=request.user,
+        wished_item=interests,
+        )
+    Product.objects.filter(id=pk).update(status='Pending')
+    return render(request, 'registration/interest.html', {'interests': interests})
 
 def wishlist(request):
     interests = ProductInterest.objects.all()
@@ -79,7 +72,16 @@ def deleteInterest(request, pk):
     interest = ProductInterest.objects.get(id=pk)
     if request.method == "POST":
         interest.delete()
-        return redirect('product:products')
-
+        return redirect('product:wishlist')
+    
     context = {'item': interest}
     return render(request, 'registration/delete.html', context)
+
+def productdone(request, pk):
+    done = Product.objects.get(id=pk)
+    if request.method == "POST":
+        Product.objects.filter(id=pk).update(status='Delivered')
+        return redirect('product:myproducts')
+    
+    context = {'pro': done}
+    return render(request, 'registration/productdone.html', context)

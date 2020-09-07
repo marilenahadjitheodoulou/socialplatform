@@ -25,11 +25,15 @@ class LogOutView(LoginRequiredMixin, BaseLogoutView):
 
 
 def home(request):
-    count = User.objects.count()
-    allproducts = Product.objects.filter()
-
+    civil = UserProfile.objects.filter(user_type='CIVILIAN')
+    ngos = UserProfile.objects.filter(user_type='NGO')
+    countcivil = civil.count()
+    countngos = ngos.count()
+    allproducts = Product.objects.filter(status='Available')
+    all = Product.objects.filter(status='Delivered')
+    total_all = all.count()
     total_product = allproducts.count()
-    context = {'count': count, 'total_product': total_product}
+    context = {'countcivil': countcivil, 'countngos': countngos, 'total_product': total_product, 'total_all': total_all}
     return render(request, 'home.html', context)
 
 
@@ -117,6 +121,10 @@ def ngodetails(request):
     
     context = {'form': form}
     return render(request, 'registration/ngodetails.html', context)
+
+def allngo(request):
+    allngo = Ngodetails.objects.filter()
+    return render(request, 'registration/allngo.html', {'allngo': allngo})
 
 def user_profile(request, pk):
     users = User.objects.get(id=pk)

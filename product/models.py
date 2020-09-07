@@ -34,31 +34,31 @@ class Subcategory(models.Model):
     def __str__(self):
         return self.name
     
-class Product(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(ProductCategory, on_delete=models.SET_NULL, null=True)
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.SET_NULL, null=True)
-    title = models.CharField(max_length=50)
-    description = models.TextField()
-    state_type = models.CharField(max_length=10, choices=STATE_TYPE_CHOICES)
-    image = models.ImageField(upload_to=get_upload_path, blank=False)
-    extra_image = models.ImageField(upload_to=get_upload_path, blank=True)
-
-    def __str__(self):
-        return self.title
-
 STATUS = (
     ('Available', 'Available'),
 	('Pending', 'Pending'),
 	('Delivered', 'Delivered'),
 )
 
+class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(ProductCategory, on_delete=models.SET_NULL, null=True)
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    received_from_my_place = models.BooleanField()
+    status = models.CharField(max_length=200, default='Available', choices=STATUS)
+    state_type = models.CharField(max_length=10, choices=STATE_TYPE_CHOICES)
+    image = models.ImageField(upload_to=get_upload_path, blank=False)
+    extra_image = models.ImageField(upload_to=get_upload_path, blank=True)
+
+    def __str__(self):
+        return self.name
+
 class ProductInterest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
-    status = models.CharField(max_length=200, default='Available', choices=STATUS)
+    wished_item = models.ForeignKey(Product, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return self.user

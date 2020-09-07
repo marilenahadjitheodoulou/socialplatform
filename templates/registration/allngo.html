@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h5>List of Non-Governmental Organization</h5>
+    <br>
+    <!-- Main Content Here -->
+    <table id="example" class="table table-bordered" style="width:100%">
+        <thead class="thead-light">
+            <tr>
+                <th>Title</th>
+                <th>Website</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in allngo %}
+            <tr>
+                <td><a href="{% url 'userprofiles:user_profile' user.user.id %}">{{user.title}}</a></td>
+                <td><a href="{{ user.website }}">{{user.website}}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="text-center">
+    <a class="small" href="{% url 'userprofiles:home' %}">Back</a>
+</div>
+
+{% endblock content %}
